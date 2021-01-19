@@ -3,4 +3,5 @@ django_env
 *.pyc
 *.jpg
 *.png
+.env
     
