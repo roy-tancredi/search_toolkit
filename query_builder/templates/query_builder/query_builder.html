@@ -1,0 +1,14 @@
+{% extends 'query_builder/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div>
+    <form class="form-group border" method="POST">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input type="submit" value="Submit">
+    </form>
+    {% if test %}
+    <p>{{ test }}</p>
+    {% endif %}
+</div>
+{% endblock %}
