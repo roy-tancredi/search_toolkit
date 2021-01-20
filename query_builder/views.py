@@ -12,9 +12,9 @@ class MainIndex(TemplateView):
 class QueryBuilderView(FormView):
     template_name = 'query_builder/query_builder.html'
 
-    def __init__(self, **kwargs):
+    def __init__(self, form_class=EngineSelectForm, **kwargs):
         super(QueryBuilderView, self).__init__()
-        self.form_class = QueryBuilderForm  # ! How to set form class dynamically?
+        self.form_class = form_class  # ! How to set form class dynamically?
 
     def post(self, request, *args, **kwargs):
         context = self.get_context_data()
@@ -22,7 +22,7 @@ class QueryBuilderView(FormView):
 
     def form_valid(self, form):
         context = self.get_context_data()
-        context['form'] = QueryBuilderForm()
+        context['form'] = QueryBuilderForm(initial=form.data)
         return render(self.request, self.template_name, context=context)
 
 

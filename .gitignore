@@ -1,7 +1,2 @@
-.vscode
-django_env
 *.pyc
-*.jpg
-*.png
-.env
-    
+*/__cache__

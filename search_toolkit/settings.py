@@ -10,8 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
-from pathlib import Path
 import environ
+from pathlib import Path
 
 env = environ.Env()
 
@@ -38,7 +38,8 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'query_builder.apps.QueryBuilderConfig',
     'crispy_forms',
-    'django_cleanup',
+    # 'django_cleanup',
+    'environ',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
