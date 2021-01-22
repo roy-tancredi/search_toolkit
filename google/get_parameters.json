@@ -1,9 +1,17 @@
 {
     "search_option": [
         {
+            "descriptor": "query",
+            "ascriptors": "",
+            "description": "The search query. This is the one required URL parameter, all others are optional.",
+            "tips": "",
+            "parameter_construct": "q={}",
+            "extra_tips": ""
+        },
+        {
             "descriptor": "phrasing",
             "ascriptors": "",
-            "description": "",
+            "description": "Forces an exact-match search.",
             "tips": "",
             "parameter_construct": "as_epq={}",
             "extra_tips": ""
@@ -11,7 +19,7 @@
         {
             "descriptor": "alternative",
             "ascriptors": "OR",
-            "description": "",
+            "description": "Concatenates terms with an alternative operator.",
             "tips": "",
             "parameter_construct": "as_oq={}",
             "extra_tips": ""
@@ -19,7 +27,7 @@
         {
             "descriptor": "negation",
             "ascriptors": "NOT",
-            "description": "",
+            "description": "Excludes given terms.",
             "tips": "",
             "parameter_construct": "as_eq={}",
             "extra_tips": ""
@@ -27,15 +35,15 @@
         {
             "descriptor": "results per page",
             "ascriptors": "",
-            "description": "",
+            "description": "Set the number of results per page to display.",
             "tips": "",
             "parameter_construct": "num={}",
             "extra_tips": ""
         },
         {
-            "descriptor": "start by result index",
-            "ascriptors": "",
-            "description": "",
+            "descriptor": "SERP position",
+            "ascriptors": "start",
+            "description": "Display the SERP that starts with the specified listing number.",
             "tips": "",
             "parameter_construct": "start={}",
             "extra_tips": ""
@@ -43,7 +51,7 @@
         {
             "descriptor": "filetype",
             "ascriptors": "extension",
-            "description": "",
+            "description": "Shows documents with specific type.",
             "tips": "",
             "parameter_construct": "as_filetype={}",
             "extra_tips": ""
@@ -51,7 +59,7 @@
         {
             "descriptor": "site search",
             "ascriptors": "",
-            "description": "Limits the results to just the site you choose.",
+            "description": "Searches in the structure of specific domain.",
             "tips": "",
             "parameter_construct": "as_sitesearch={}",
             "extra_tips": ""
@@ -59,15 +67,15 @@
         {
             "descriptor": "time interval",
             "ascriptors": "",
-            "description": "",
+            "description": "Search within a date range to present.",
             "tips": "",
             "parameter_construct": "as_qdr={}",
-            "extra_tips": ""
+            "extra_tips": "Use y for year, m for month, w for week, d for day, h for hour, n for minute, and s for second.\nFollow the letter with a number if you want more than one."
         },
         {
             "descriptor": "license",
             "ascriptors": "use rights",
-            "description": "Google API have great choices preperate.",
+            "description": "Restricts results to re-usable (Creative Commons licensed) content.\nGoogle API have great choices preperate.",
             "tips": "",
             "parameter_construct": "as_rights={}",
             "extra_tips": ""
@@ -75,7 +83,7 @@
         {
             "descriptor": "all in title",
             "ascriptors": "",
-            "description": "add-on of q parameter",
+            "description": "Displays pages with given words in tittle.\nadd-on of q parameter",
             "tips": "",
             "parameter_construct": "allintitle%3A",
             "extra_tips": ""
@@ -83,7 +91,7 @@
         {
             "descriptor": "all in text",
             "ascriptors": "",
-            "description": "add-on of q parameter",
+            "description": "Displays pages with given words in whole text.\nadd-on of q parameter",
             "tips": "",
             "parameter_construct": "allintext%3A",
             "extra_tips": ""
@@ -91,7 +99,7 @@
         {
             "descriptor": "all in URL",
             "ascriptors": "",
-            "description": "add-on of q parameter",
+            "description": "Displays pages with given words in URL.\nadd-on of q parameter",
             "tips": "",
             "parameter_construct": "allinurl%3A",
             "extra_tips": ""
@@ -99,7 +107,7 @@
         {
             "descriptor": "all in anchor",
             "ascriptors": "",
-            "description": "add-on of q parameter",
+            "description": "Displays pages with given words as anchors.\nadd-on of q parameter",
             "tips": "",
             "parameter_construct": "allinanchor%3A",
             "extra_tips": ""
@@ -107,7 +115,7 @@
         {
             "descriptor": "numeric range",
             "ascriptors": "",
-            "description": "add-on of q parameter",
+            "description": "Displays pages with a specified number range.\nadd-on of q parameter",
             "tips": "",
             "parameter_construct": "{}..{}",
             "extra_tips": ""
@@ -115,7 +123,7 @@
         {
             "descriptor": "literal",
             "ascriptors": "",
-            "description": "add-on of q parameter",
+            "description": "Forces an literal treatment of term.\nadd-on of q parameter",
             "tips": "",
             "parameter_construct": "%2B{}",
             "extra_tips": ""
@@ -123,7 +131,7 @@
         {
             "descriptor": "figurative",
             "ascriptors": "",
-            "description": "add-on of q parameter",
+            "description": "Takes into account variation of the term.\nadd-on of q parameter",
             "tips": "",
             "parameter_construct": "~{}",
             "extra_tips": ""
@@ -131,7 +139,7 @@
         {
             "descriptor": "definition",
             "ascriptors": "",
-            "description": "add-on of q parameter",
+            "description": "Displays the meaning of a word in a card-like result.\nadd-on of q parameter",
             "tips": "",
             "parameter_construct": "define%A{}",
             "extra_tips": ""
@@ -139,7 +147,7 @@
         {
             "descriptor": "safe search",
             "ascriptors": "",
-            "description": "values active and images",
+            "description": "Toggles off or on Google’s safe search filtering.\nvalues active and images/off?",
             "tips": "",
             "parameter_construct": "safe={}",
             "extra_tips": ""
@@ -147,7 +155,7 @@
         {
             "descriptor": "sites related",
             "ascriptors": "",
-            "description": "",
+            "description": "Shows websties similaar to a given resource.",
             "tips": "",
             "parameter_construct": "as_rq={}",
             "extra_tips": ""
@@ -163,7 +171,7 @@
         {
             "descriptor": "open in new window",
             "ascriptors": "",
-            "description": "switch, choices 0 and 1",
+            "description": "Opens links in new window.\nswitch, choices 0 and 1",
             "tips": "",
             "parameter_construct": "newwindow=n",
             "extra_tips": ""
@@ -171,7 +179,7 @@
         {
             "descriptor": "personalization",
             "ascriptors": "",
-            "description": "switch, choices 0 and 1",
+            "description": "Turns off 'personalized web search' option.\nswitch, choices 0 and 1",
             "tips": "",
             "parameter_construct": "pws={}",
             "extra_tips": ""
@@ -179,7 +187,7 @@
         {
             "descriptor": "AdWords",
             "ascriptors": "",
-            "description": "switch, choices on and off",
+            "description": "Terminates connection to the AdWords database.\nswitch, choices on and off",
             "tips": "",
             "parameter_construct": "adtest={}",
             "extra_tips": ""
@@ -187,7 +195,7 @@
         {
             "descriptor": "search button",
             "ascriptors": "",
-            "description": "values 'Search' and 'btnl' (feel lucky)",
+            "description": "Simulates search button click.\nvalues 'Search' and 'btnl' (feel lucky)",
             "tips": "",
             "parameter_construct": "btnG={}",
             "extra_tips": ""
@@ -195,7 +203,7 @@
         {
             "descriptor": "interface language",
             "ascriptors": "",
-            "description": "",
+            "description": "Specifies the interface language.",
             "tips": "",
             "parameter_construct": "hl={}",
             "extra_tips": ""
@@ -203,7 +211,7 @@
         {
             "descriptor": "results language",
             "ascriptors": "",
-            "description": "",
+            "description": "Specifies language of result documents.",
             "tips": "",
             "parameter_construct": "lr={}",
             "extra_tips": ""
@@ -211,18 +219,26 @@
         {
             "descriptor": "location",
             "ascriptors": "",
-            "description": "",
+            "description": "Indicates the country of result documents.",
             "tips": "",
             "parameter_construct": "cr=country{}",
-            "extra_tips": ""
+            "extra_tips": "Google API"
         },
         {
             "descriptor": "show omitted",
             "ascriptors": "",
-            "description": "values 0 and 1",
+            "description": "Includes back the listings that Google omitted into the results.\nvalues 0 and 1",
             "tips": "",
             "parameter_construct": "filter={}",
             "extra_tips": ""
+        },
+        {
+            "descriptor": "search type",
+            "ascriptors": "",
+            "description": "Indicates a specific Google service to use, i.e. Image, Video, News...",
+            "tips": "",
+            "parameter_construct": "tbm={}",
+            "extra_tips": "bks, app, isch (img), vid, nws, shop"
         }
     ]
 }
