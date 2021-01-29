@@ -1,15 +1,32 @@
 from django.db import models
 
 
-class SettingValue(models.Model):
+class SearchEngine(models.Model):
     """
-    SOON...
+    Represents a search engine.
+
+    Atributes
+    ---------
+    name : <str>
+        Distinctive name of search engine (or specific query type).
+
+    get_url : <str>
+        The base of specific URL for sending query.
+
+    icon_path : <str>
+        The path to search engine brand icon.
+
     """
-    value = models.CharField(max_length=128)
-    human_readable = models.CharField(max_length=128)
+
+    name = models.CharField(max_length=32, unique=True)
+    get_url = models.CharField(max_length=64, unique=True)
+    icon_path = models.CharField(max_length=128, blank=True)
+
+    class Meta:
+        ordering = ['name']
 
     def __str__(self):
-        return 'Value'
+        return f'{self.name} Engine'
 
 
 class SearchSetting(models.Model):
@@ -17,7 +34,6 @@ class SearchSetting(models.Model):
     Represents search operators/special operators and more advenced search option, 
     like changing location or language, etc.
 
-    ...
     Atributes
     ---------
     descritor : <str>
@@ -32,15 +48,20 @@ class SearchSetting(models.Model):
     values : <ManyToManyField>
         Setting's values if any specific.
 
+    engine : <ManyToManyField>
+        Relation to SearchEngine Model through Invocation Model.
+
     tips : <str>
         Independent of engine general clues for using specific setting.
+
     """
+
     descriptor = models.CharField(
         'the most adequate setting\'s name', max_length=64, unique=True)
     ascriptors = models.CharField(
-        'verbal equivalents to setting\'s name', max_length=256, blank=True)
+        'verbal equivalents to descriptor', max_length=256, blank=True)
     description = models.TextField()
-    values = models.ManyToManyField(SettingValue)
+    engine = models.ManyToManyField(SearchEngine, through='Invocation')
     tips = models.CharField(
         'general clues for using specific setting', max_length=256, blank=True)
 
@@ -51,44 +72,35 @@ class SearchSetting(models.Model):
         return f'{self.descriptor} Option'
 
 
-class SearchEngine(models.Model):
+class SettingValue(models.Model):
     """
-    Represents a search engine.
+    Storing choices for setting if is needed.
 
-    ...
     Atributes
     ---------
-    name : <str>
-        Distinctive name of search engine (or specific query type).
 
-    get_url : <str>
-        The base of specific URL for sending query.
+    value : <str>
+        Value defined by engine provider.
 
-    icon_path : <str>
-        The path to search engine brand icon.
+    human_readable : <str>
+        Value for performing.
 
-    setting : <ManyToManyField>
-        Relation to SearchSetting Model through Invocation Model.
+    setting : <ManyToOneField>
+        Relation to specific setting that refers to choices.
 
     """
-
-    name = models.CharField(max_length=32, unique=True)
-    get_url = models.CharField(max_length=64, unique=True)
-    icon_path = models.CharField(max_length=128, blank=True)
-    settings = models.ManyToManyField(SearchSetting, through='Invocation')
-
-    class Meta:
-        ordering = ['name']
+    value = models.CharField(max_length=128)
+    human_readable = models.CharField(max_length=128)
+    setting = models.ForeignKey(SearchSetting, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.name} Engine'
+        return 'Value'
 
 
 class Invocation(models.Model):
     """
     Contains specific usage parametrs for specific option in various search engines.
 
-    ...
     Atributes
     ---------
     engine : <ForeignKey>
