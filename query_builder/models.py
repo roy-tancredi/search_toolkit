@@ -45,9 +45,6 @@ class SearchSetting(models.Model):
     description : <str>
         Description of option usage.
 
-    values : <ManyToManyField>
-        Setting's values if any specific.
-
     engine : <ManyToManyField>
         Relation to SearchEngine Model through Invocation Model.
 
@@ -69,7 +66,7 @@ class SearchSetting(models.Model):
         ordering = ['descriptor']
 
     def __str__(self):
-        return f'{self.descriptor} Option'
+        return f'{self.descriptor}'
 
 
 class SettingValue(models.Model):
@@ -91,10 +88,11 @@ class SettingValue(models.Model):
     """
     value = models.CharField(max_length=128)
     human_readable = models.CharField(max_length=128)
-    setting = models.ForeignKey(SearchSetting, on_delete=models.CASCADE)
+    setting = models.ForeignKey(
+        SearchSetting, on_delete=models.CASCADE, blank=True)
 
     def __str__(self):
-        return 'Value'
+        return f'Value of {self.setting}'
 
 
 class Invocation(models.Model):
@@ -123,6 +121,9 @@ class Invocation(models.Model):
         'search parameter key and syntax', max_length=128)
     extra_tips = models.CharField(
         'tips for usage in specific engine', max_length=256, blank=True)
+
+    class Meta:
+        ordering = ['setting']
 
     def __str__(self):
         return f'Invocation of {self.setting} for {self.engine}'

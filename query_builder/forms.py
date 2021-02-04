@@ -4,6 +4,7 @@ from django.core.exceptions import ValidationError
 
 
 class ListTextWidget(forms.TextInput):
+
     def __init__(self, name, data_list, *args, **kwargs):
         super(ListTextWidget, self).__init__(*args, **kwargs)
         self._name = name
@@ -22,6 +23,20 @@ class ListTextWidget(forms.TextInput):
         data_list += '</datalist>'
 
         return (text_html + data_list)
+
+
+class ListTextField(forms.Field):
+    # def __init__(self, *, name=None, data_list=[], strip=True, empty_value='', **kwargs):
+
+    def to_python(self, value):
+        """Return a string."""
+        if value not in self.empty_values:
+            value = str(value)
+            if self.strip:
+                value = value.strip()
+        if value in self.empty_values:
+            return self.empty_value
+        return value
 
 
 class EngineSelectForm(forms.Form):

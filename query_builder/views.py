@@ -26,16 +26,16 @@ class QueryBuilderView(FormView):
         return render(self.request, self.template_name, context=context)
 
 
-# def query_builder(request, **kwargs):
-#     context = {
-#         'form': EngineSelectForm(),
-#         'status': '0'
-#     }
+def query_builder(request, **kwargs):
+    context = {
+        'form': EngineSelectForm(),
+        'status': '0'
+    }
 
-#     if request.method == 'POST':
-#         if context['status'] == '1':
-#             redirect('https://www.duckduckgo.com/')
-#         else:
-#             context['form'] = QueryBuilderForm(initial=request.POST)
-#             context['status'] = '1'
-#     return render(request, 'query_builder/query_builder.html', context)
+    if request.method == 'POST':
+        if context['status'] == '1':
+            redirect('https://www.duckduckgo.com/')
+        else:
+            context['form'] = QueryBuilderForm(initial=request.POST)
+            context['status'] = '1'
+    return render(request, 'query_builder/query_builder.html', context)

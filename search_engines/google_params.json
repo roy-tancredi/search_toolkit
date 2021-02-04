@@ -3,7 +3,7 @@
         {
             "descriptor": "query",
             "ascriptors": "",
-            "description": "The search query. This is the one required URL parameter, all others are optional.",
+            "description": "The search query.",
             "tips": "",
             "parameter_construct": "q={}",
             "extra_tips": ""
@@ -41,8 +41,8 @@
             "extra_tips": ""
         },
         {
-            "descriptor": "SERP position",
-            "ascriptors": "start",
+            "descriptor": "SERP start position",
+            "ascriptors": "",
             "description": "Display the SERP that starts with the specified listing number.",
             "tips": "",
             "parameter_construct": "start={}",
@@ -75,74 +75,74 @@
         {
             "descriptor": "license",
             "ascriptors": "use rights",
-            "description": "Restricts results to re-usable (Creative Commons licensed) content.\nGoogle API have great choices preperate.",
+            "description": "Restricts results to re-usable (Creative Commons licensed) content.",
             "tips": "",
             "parameter_construct": "as_rights={}",
-            "extra_tips": ""
+            "extra_tips": "Google API have great choices preperated."
         },
         {
             "descriptor": "all in title",
             "ascriptors": "",
-            "description": "Displays pages with given words in tittle.\nadd-on of q parameter",
+            "description": "Displays pages with given words in tittle.",
             "tips": "",
-            "parameter_construct": "allintitle%3A",
-            "extra_tips": ""
+            "parameter_construct": "allintitle%3A{}",
+            "extra_tips": "add-on of q parameter"
         },
         {
             "descriptor": "all in text",
             "ascriptors": "",
-            "description": "Displays pages with given words in whole text.\nadd-on of q parameter",
+            "description": "Displays pages with given words in whole text.",
             "tips": "",
-            "parameter_construct": "allintext%3A",
-            "extra_tips": ""
+            "parameter_construct": "allintext%3A{}",
+            "extra_tips": "add-on of q parameter."
         },
         {
             "descriptor": "all in URL",
             "ascriptors": "",
-            "description": "Displays pages with given words in URL.\nadd-on of q parameter",
+            "description": "Displays pages with given words in URL.",
             "tips": "",
-            "parameter_construct": "allinurl%3A",
-            "extra_tips": ""
+            "parameter_construct": "allinurl%3A{}",
+            "extra_tips": "add-on of q parameter"
         },
         {
             "descriptor": "all in anchor",
             "ascriptors": "",
-            "description": "Displays pages with given words as anchors.\nadd-on of q parameter",
+            "description": "Displays pages with given words as anchors.",
             "tips": "",
-            "parameter_construct": "allinanchor%3A",
-            "extra_tips": ""
+            "parameter_construct": "allinanchor%3A{}",
+            "extra_tips": "add-on of q parameter"
         },
         {
             "descriptor": "numeric range",
             "ascriptors": "",
-            "description": "Displays pages with a specified number range.\nadd-on of q parameter",
+            "description": "Displays pages with a specified number range.",
             "tips": "",
             "parameter_construct": "{}..{}",
-            "extra_tips": ""
+            "extra_tips": "add-on of q parameter"
         },
         {
             "descriptor": "literal",
             "ascriptors": "",
-            "description": "Forces an literal treatment of term.\nadd-on of q parameter",
+            "description": "Forces an literal treatment of term.",
             "tips": "",
             "parameter_construct": "%2B{}",
-            "extra_tips": ""
+            "extra_tips": "add-on of q parameter"
         },
         {
             "descriptor": "figurative",
             "ascriptors": "",
-            "description": "Takes into account variation of the term.\nadd-on of q parameter",
+            "description": "Takes into account variation of the term.",
             "tips": "",
             "parameter_construct": "~{}",
-            "extra_tips": ""
+            "extra_tips": "add-on of q parameter"
         },
         {
             "descriptor": "definition",
             "ascriptors": "",
-            "description": "Displays the meaning of a word in a card-like result.\nadd-on of q parameter",
+            "description": "Displays the meaning of a word in a card-like result.",
             "tips": "",
             "parameter_construct": "define%A{}",
-            "extra_tips": ""
+            "extra_tips": "add-on of q parameter"
         },
         {
             "descriptor": "safe search",
@@ -171,10 +171,10 @@
         {
             "descriptor": "open in new window",
             "ascriptors": "",
-            "description": "Opens links in new window.\nswitch, choices 0 and 1",
+            "description": "Opens links in new window.",
             "tips": "",
-            "parameter_construct": "newwindow=n",
-            "extra_tips": ""
+            "parameter_construct": "newwindow={}",
+            "extra_tips": "switch, choices 0 and 1"
         },
         {
             "descriptor": "personalization",
@@ -195,10 +195,10 @@
         {
             "descriptor": "search button",
             "ascriptors": "",
-            "description": "Simulates search button click.\nvalues 'Search' and 'btnl' (feel lucky)",
+            "description": "Simulates search button click.",
             "tips": "",
             "parameter_construct": "btnG={}",
-            "extra_tips": ""
+            "extra_tips": "values 'Search' and 'btnl' (feel lucky)"
         },
         {
             "descriptor": "interface language",
@@ -227,14 +227,14 @@
         {
             "descriptor": "show omitted",
             "ascriptors": "",
-            "description": "Includes back the listings that Google omitted into the results.\nvalues 0 and 1",
+            "description": "Includes back the listings that Google omitted into the results.",
             "tips": "",
             "parameter_construct": "filter={}",
-            "extra_tips": ""
+            "extra_tips": "values 0 and 1"
         },
         {
             "descriptor": "search type",
-            "ascriptors": "",
+            "ascriptors": "service",
             "description": "Indicates a specific Google service to use, i.e. Image, Video, News...",
             "tips": "",
             "parameter_construct": "tbm={}",
