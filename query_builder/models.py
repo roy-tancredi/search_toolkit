@@ -108,7 +108,8 @@ class Invocation(models.Model):
         Relation to SearchSetting Model.
 
     param_construct : <str>
-        Specific parameter construction - <keyword>=<placeholder> in general.
+        Specific parameter construction defined by engine provider as str object
+        with placeholder for value.
 
     extra_tips : <str>
         Tips for usage setting in specific search engine.
