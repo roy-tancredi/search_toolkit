@@ -1,13 +1,31 @@
 from django import forms
 from .models import SearchEngine
 
+all_settings = SearchEngine.objects.get(pk=3).searchsetting_set.all()
+
 
 class SettingsSelectForm(forms.Form):
-    settings = SearchEngine.objects.get(pk=3).searchsetting_set.all()
-    setting_choices = [(s.id, s.descriptor) for s in settings]
+    setting_choices = [(s.id, s.descriptor) for s in all_settings]
 
     search_settings = forms.MultipleChoiceField(
         choices=setting_choices, required=True, widget=forms.CheckboxSelectMultiple)
+
+
+class QueryBuilderForm(forms.Form):
+
+    test = forms.CharField(max_length=100, strip=True)
+
+    def __init__(self, settings=None, *args, **kwargs):
+        print(settings)
+        print(args)
+        print(kwargs)
+        settings = list(map(int, settings))
+        settings = all_settings.filter(id__in=settings)
+        super(QueryBuilderForm, self).__init__(*args, **kwargs)
+        for i, setting in enumerate(settings):
+            self.fields[f'custom_{setting.id}'] = forms.CharField(
+                label=setting.descriptor)
+
 
 # ignore this class for now
 # class ListTextWidget(forms.TextInput):
