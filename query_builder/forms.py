@@ -1,4 +1,6 @@
 from django import forms
+from django.core.exceptions import ValidationError
+
 from .models import SearchEngine
 
 all_settings = SearchEngine.objects.get(pk=3).searchsetting_set.all()
@@ -10,20 +12,25 @@ class SettingsSelectForm(forms.Form):
     search_settings = forms.MultipleChoiceField(
         choices=setting_choices, required=True, widget=forms.CheckboxSelectMultiple)
 
+    def clean_search_settings(self):
+        settings = self.cleaned_data['search_settings']
+        data = list(map(int, settings))
+        for item in data:
+            if item not in [setting.id for setting in all_settings]:
+                raise ValidationError(
+                    "Something went wrong. Please try again.")
+        return data
+
 
 class QueryBuilderForm(forms.Form):
 
-    test = forms.CharField(max_length=100, strip=True)
-
     def __init__(self, settings=None, *args, **kwargs):
-        print(settings)
-        print(args)
-        print(kwargs)
-        settings = list(map(int, settings))
         settings = all_settings.filter(id__in=settings)
+
         super(QueryBuilderForm, self).__init__(*args, **kwargs)
+
         for i, setting in enumerate(settings):
-            self.fields[f'custom_{setting.id}'] = forms.CharField(
+            self.fields[f'setting_{setting.id}'] = forms.CharField(
                 label=setting.descriptor)
 
 
