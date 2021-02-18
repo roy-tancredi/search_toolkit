@@ -51,6 +51,9 @@ class SearchSetting(models.Model):
     tips : <str>
         Independent of engine general clues for using specific setting.
 
+    setting_type : <str>
+        Types grouping settings in functional sets.
+
     """
 
     descriptor = models.CharField(
@@ -61,38 +64,14 @@ class SearchSetting(models.Model):
     engine = models.ManyToManyField(SearchEngine, through='Invocation')
     tips = models.CharField(
         'general clues for using specific setting', max_length=256, blank=True)
+    setting_type = models.CharField(
+        'typology of search settings', max_length=64, blank=True)
 
     class Meta:
         ordering = ['descriptor']
 
     def __str__(self):
         return f'{self.descriptor}'
-
-
-class SettingValue(models.Model):
-    """
-    Storing choices for setting if is needed.
-
-    Atributes
-    ---------
-
-    value : <str>
-        Value defined by engine provider.
-
-    human_readable : <str>
-        Value for performing.
-
-    setting : <ManyToOneField>
-        Relation to specific setting that refers to choices.
-
-    """
-    value = models.CharField(max_length=128)
-    human_readable = models.CharField(max_length=128)
-    setting = models.ForeignKey(
-        SearchSetting, on_delete=models.CASCADE, blank=True)
-
-    def __str__(self):
-        return f'Value of {self.setting}'
 
 
 class Invocation(models.Model):
@@ -128,3 +107,29 @@ class Invocation(models.Model):
 
     def __str__(self):
         return f'Invocation of {self.setting} for {self.engine}'
+
+
+class SettingValue(models.Model):
+    """
+    Storing choices for setting if is needed.
+
+    Atributes
+    ---------
+
+    value : <str>
+        Value defined by engine provider.
+
+    human_readable : <str>
+        Value for performing.
+
+    setting : <ManyToOneField>
+        Relation to specific setting that refers to choices.
+
+    """
+    value = models.CharField(max_length=128)
+    human_readable = models.CharField(max_length=128)
+    setting = models.ForeignKey(
+        SearchSetting, on_delete=models.CASCADE, blank=True)
+
+    def __str__(self):
+        return f'Value of {self.setting.title()} Setting'

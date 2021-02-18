@@ -1,244 +1,274 @@
 {
-    "search_option": [
+    "settings": [
         {
             "descriptor": "query",
             "ascriptors": "",
             "description": "The search query.",
             "tips": "",
-            "parameter_construct": "q={}",
-            "extra_tips": ""
+            "param_construct": "q={}",
+            "extra_tips": "",
+            "setting_type": "basic"
         },
         {
             "descriptor": "phrasing",
             "ascriptors": "",
             "description": "Forces an exact-match search.",
             "tips": "",
-            "parameter_construct": "as_epq={}",
-            "extra_tips": ""
+            "param_construct": "as_epq={}",
+            "extra_tips": "",
+            "setting_type": "basic operators"
         },
         {
             "descriptor": "alternative",
             "ascriptors": "OR",
             "description": "Concatenates terms with an alternative operator.",
             "tips": "",
-            "parameter_construct": "as_oq={}",
-            "extra_tips": ""
+            "param_construct": "as_oq={}",
+            "extra_tips": "",
+            "setting_type": "basic operators"
         },
         {
             "descriptor": "negation",
             "ascriptors": "NOT",
             "description": "Excludes given terms.",
             "tips": "",
-            "parameter_construct": "as_eq={}",
-            "extra_tips": ""
+            "param_construct": "as_eq={}",
+            "extra_tips": "",
+            "setting_type": "basic operators"
         },
         {
             "descriptor": "results per page",
             "ascriptors": "",
             "description": "Set the number of results per page to display.",
             "tips": "",
-            "parameter_construct": "num={}",
-            "extra_tips": ""
+            "param_construct": "num={}",
+            "extra_tips": "",
+            "setting_type": "interface"
         },
         {
             "descriptor": "SERP start position",
             "ascriptors": "",
             "description": "Display the SERP that starts with the specified listing number.",
             "tips": "",
-            "parameter_construct": "start={}",
-            "extra_tips": ""
+            "param_construct": "start={}",
+            "extra_tips": "",
+            "setting_type": "interface"
         },
         {
-            "descriptor": "filetype",
+            "descriptor": "file format",
             "ascriptors": "extension",
             "description": "Shows documents with specific type.",
             "tips": "",
-            "parameter_construct": "as_filetype={}",
-            "extra_tips": ""
+            "param_construct": "as_filetype={}",
+            "extra_tips": "",
+            "setting_type": "filters"
         },
         {
-            "descriptor": "site search",
+            "descriptor": "domain search",
             "ascriptors": "",
             "description": "Searches in the structure of specific domain.",
             "tips": "",
-            "parameter_construct": "as_sitesearch={}",
-            "extra_tips": ""
+            "param_construct": "as_sitesearch={}",
+            "extra_tips": "",
+            "setting_type": "filters"
         },
         {
             "descriptor": "time interval",
             "ascriptors": "",
             "description": "Search within a date range to present.",
             "tips": "",
-            "parameter_construct": "as_qdr={}",
-            "extra_tips": "Use y for year, m for month, w for week, d for day, h for hour, n for minute, and s for second.\nFollow the letter with a number if you want more than one."
+            "param_construct": "as_qdr={}",
+            "extra_tips": "Use y for year, m for month, w for week, d for day, h for hour, n for minute, and s for second.\nFollow the letter with a number if you want more than one.",
+            "setting_type": "filters"
         },
         {
-            "descriptor": "license",
+            "descriptor": "license scope",
             "ascriptors": "use rights",
             "description": "Restricts results to re-usable (Creative Commons licensed) content.",
             "tips": "",
-            "parameter_construct": "as_rights={}",
-            "extra_tips": "Google API have great choices preperated."
+            "param_construct": "as_rights={}",
+            "extra_tips": "Google API have great choices preperated.",
+            "setting_type": "filters"
         },
         {
             "descriptor": "all in title",
             "ascriptors": "",
             "description": "Displays pages with given words in tittle.",
             "tips": "",
-            "parameter_construct": "allintitle%3A{}",
-            "extra_tips": "add-on of q parameter"
+            "param_construct": "allintitle%3A{}",
+            "extra_tips": "add-on of q parameter",
+            "setting_type": "terms treatment"
         },
         {
             "descriptor": "all in text",
             "ascriptors": "",
             "description": "Displays pages with given words in whole text.",
             "tips": "",
-            "parameter_construct": "allintext%3A{}",
-            "extra_tips": "add-on of q parameter."
+            "param_construct": "allintext%3A{}",
+            "extra_tips": "add-on of q parameter.",
+            "setting_type": "terms treatment"
         },
         {
             "descriptor": "all in URL",
             "ascriptors": "",
             "description": "Displays pages with given words in URL.",
             "tips": "",
-            "parameter_construct": "allinurl%3A{}",
-            "extra_tips": "add-on of q parameter"
+            "param_construct": "allinurl%3A{}",
+            "extra_tips": "add-on of q parameter",
+            "setting_type": "terms treatment"
         },
         {
             "descriptor": "all in anchor",
             "ascriptors": "",
             "description": "Displays pages with given words as anchors.",
             "tips": "",
-            "parameter_construct": "allinanchor%3A{}",
-            "extra_tips": "add-on of q parameter"
+            "param_construct": "allinanchor%3A{}",
+            "extra_tips": "add-on of q parameter",
+            "setting_type": "terms treatment"
         },
         {
             "descriptor": "numeric range",
             "ascriptors": "",
             "description": "Displays pages with a specified number range.",
             "tips": "",
-            "parameter_construct": "{}..{}",
-            "extra_tips": "add-on of q parameter"
+            "param_construct": "{}..{}",
+            "extra_tips": "add-on of q parameter",
+            "setting_type": "filters"
         },
         {
-            "descriptor": "literal",
+            "descriptor": "literal meaning",
             "ascriptors": "",
             "description": "Forces an literal treatment of term.",
             "tips": "",
-            "parameter_construct": "%2B{}",
-            "extra_tips": "add-on of q parameter"
+            "param_construct": "%2B{}",
+            "extra_tips": "add-on of q parameter",
+            "setting_type": "terms treatment"
         },
         {
-            "descriptor": "figurative",
-            "ascriptors": "",
+            "descriptor": "figurative meaning",
+            "ascriptors": "~",
             "description": "Takes into account variation of the term.",
             "tips": "",
-            "parameter_construct": "~{}",
-            "extra_tips": "add-on of q parameter"
+            "param_construct": "~{}",
+            "extra_tips": "add-on of q parameter",
+            "setting_type": "terms treatment"
         },
         {
-            "descriptor": "definition",
-            "ascriptors": "",
+            "descriptor": "definition of term",
+            "ascriptors": "define",
             "description": "Displays the meaning of a word in a card-like result.",
             "tips": "",
-            "parameter_construct": "define%A{}",
-            "extra_tips": "add-on of q parameter"
+            "param_construct": "define%A{}",
+            "extra_tips": "add-on of q parameter",
+            "setting_type": "terms treatment"
         },
         {
             "descriptor": "safe search",
             "ascriptors": "",
-            "description": "Toggles off or on Google’s safe search filtering.\nvalues active and images/off?",
+            "description": "Toggles off or on Google’s safe search filtering.\nvalues active and images?",
             "tips": "",
-            "parameter_construct": "safe={}",
-            "extra_tips": ""
+            "param_construct": "safe={}",
+            "extra_tips": "",
+            "setting_type": "filters"
         },
         {
             "descriptor": "sites related",
             "ascriptors": "",
-            "description": "Shows websties similaar to a given resource.",
+            "description": "Shows websties similar to a given resource.",
             "tips": "",
-            "parameter_construct": "as_rq={}",
-            "extra_tips": ""
+            "param_construct": "as_rq={}",
+            "extra_tips": "",
+            "setting_type": "filters"
         },
         {
-            "descriptor": "reffering pages",
-            "ascriptors": "",
-            "description": "",
+            "descriptor": "referring pages",
+            "ascriptors": "link",
+            "description": "Show websites that links to a given URL.",
             "tips": "",
-            "parameter_construct": "",
-            "extra_tips": ""
+            "param_construct": "as_lq={}",
+            "extra_tips": "",
+            "setting_type": ""
         },
         {
             "descriptor": "open in new window",
             "ascriptors": "",
             "description": "Opens links in new window.",
             "tips": "",
-            "parameter_construct": "newwindow={}",
-            "extra_tips": "switch, choices 0 and 1"
+            "param_construct": "newwindow={}",
+            "extra_tips": "switch, choices 0 and 1",
+            "setting_type": "interface"
         },
         {
             "descriptor": "personalization",
-            "ascriptors": "",
+            "ascriptors": "customization",
             "description": "Turns off 'personalized web search' option.\nswitch, choices 0 and 1",
             "tips": "",
-            "parameter_construct": "pws={}",
-            "extra_tips": ""
+            "param_construct": "pws={}",
+            "extra_tips": "",
+            "setting_type": "filters"
         },
         {
             "descriptor": "AdWords",
-            "ascriptors": "",
+            "ascriptors": "advertisement",
             "description": "Terminates connection to the AdWords database.\nswitch, choices on and off",
             "tips": "",
-            "parameter_construct": "adtest={}",
-            "extra_tips": ""
+            "param_construct": "adtest={}",
+            "extra_tips": "",
+            "setting_type": "interface"
         },
         {
             "descriptor": "search button",
-            "ascriptors": "",
+            "ascriptors": "click",
             "description": "Simulates search button click.",
             "tips": "",
-            "parameter_construct": "btnG={}",
-            "extra_tips": "values 'Search' and 'btnl' (feel lucky)"
+            "param_construct": "btnG={}",
+            "extra_tips": "values 'Search' and 'btnl' (feel lucky)",
+            "setting_type": "basic"
         },
         {
             "descriptor": "interface language",
             "ascriptors": "",
             "description": "Specifies the interface language.",
             "tips": "",
-            "parameter_construct": "hl={}",
-            "extra_tips": ""
+            "param_construct": "hl={}",
+            "extra_tips": "",
+            "setting_type": "language and location"
         },
         {
             "descriptor": "results language",
             "ascriptors": "",
             "description": "Specifies language of result documents.",
             "tips": "",
-            "parameter_construct": "lr={}",
-            "extra_tips": ""
+            "param_construct": "lr={}",
+            "extra_tips": "",
+            "setting_type": "language and location"
         },
         {
             "descriptor": "location",
-            "ascriptors": "",
+            "ascriptors": "country;region",
             "description": "Indicates the country of result documents.",
             "tips": "",
-            "parameter_construct": "cr=country{}",
-            "extra_tips": "Google API"
+            "param_construct": "cr=country{}",
+            "extra_tips": "Google API",
+            "setting_type": "language and location"
         },
         {
             "descriptor": "show omitted",
             "ascriptors": "",
             "description": "Includes back the listings that Google omitted into the results.",
             "tips": "",
-            "parameter_construct": "filter={}",
-            "extra_tips": "values 0 and 1"
+            "param_construct": "filter={}",
+            "extra_tips": "values 0 and 1",
+            "setting_type": "filters"
         },
         {
             "descriptor": "search type",
             "ascriptors": "service",
             "description": "Indicates a specific Google service to use, i.e. Image, Video, News...",
             "tips": "",
-            "parameter_construct": "tbm={}",
-            "extra_tips": "bks, app, isch (img), vid, nws, shop"
+            "param_construct": "tbm={}",
+            "extra_tips": "bks, app, isch (img), vid, nws, shop",
+            "setting_type": "filters"
         }
     ]
 }

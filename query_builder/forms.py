@@ -4,6 +4,7 @@ from django.core.exceptions import ValidationError
 from .models import SearchEngine
 
 all_settings = SearchEngine.objects.get(pk=3).searchsetting_set.all()
+# all_settings = []
 
 
 class SettingsSelectForm(forms.Form):

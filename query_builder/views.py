@@ -1,5 +1,3 @@
-import urllib
-
 from django.http import HttpResponseRedirect
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView
