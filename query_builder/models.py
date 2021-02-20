@@ -51,7 +51,7 @@ class SearchSetting(models.Model):
     tips : <str>
         Independent of engine general clues for using specific setting.
 
-    setting_type : <str>
+    group : <str>
         Types grouping settings in functional sets.
 
     """
@@ -64,7 +64,7 @@ class SearchSetting(models.Model):
     engine = models.ManyToManyField(SearchEngine, through='Invocation')
     tips = models.CharField(
         'general clues for using specific setting', max_length=256, blank=True)
-    setting_type = models.CharField(
+    group = models.CharField(
         'typology of search settings', max_length=64, blank=True)
 
     class Meta:
@@ -132,4 +132,4 @@ class SettingValue(models.Model):
         SearchSetting, on_delete=models.CASCADE, blank=True)
 
     def __str__(self):
-        return f'Value of {self.setting.title()} Setting'
+        return f'Value of {self.setting} Setting: {self.human_readable}'

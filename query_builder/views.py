@@ -26,13 +26,12 @@ class SettingsSelectView(FormView):
 
 class QueryBuilderView(FormView):
     # TODO embrance the chaos with templates
-    template_name = 'query_builder/forms.html'
+    template_name = 'query_builder/query_builder.html'
     form_class = QueryBuilderForm
     success_url = '/'
 
     def get_form(self, form_class=None):
-        settings = self.request.session['temp_data'].get(
-            'search_settings')
+        settings = self.request.session.get('temp_data')
         if form_class is None:
             form_class = self.get_form_class()
         return self.form_class(settings, **self.get_form_kwargs())
