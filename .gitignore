@@ -1,3 +1,5 @@
 *.pyc
 .env
 */__cache__
+cleaning.py
+testing.py

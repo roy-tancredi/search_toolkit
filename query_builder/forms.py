@@ -1,9 +1,12 @@
-from itertools import chain
+from itertools import chain, groupby
+# from operator import attrgetter
+import re
 
 from django import forms
 from django.core.exceptions import ValidationError
 
 from .models import SearchEngine
+from .customized import ListTextWidget
 
 
 # makeshift solution before implementing more search engines
@@ -15,27 +18,29 @@ class SettingsSelectForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(SettingsSelectForm, self).__init__(*args, **kwargs)
 
-        settings = [(s.id, s.descriptor, s.group)
-                    for s in all_settings.exclude(group='basic')]
+        # _setting_attrs = attrgetter('id', 'descriptor', 'group')
+        _settings = [(s.id, s.descriptor, s.group)
+                     for s in all_settings.exclude(group__in=('basic', 'basic operators'))]
 
-        grouped_settings = self.group_by_value(settings, 2).items()
+        _grouped_settings = self._group_by_value(_settings, 2).items()
 
-        for label, choices in grouped_settings:
+        for label, choices in _grouped_settings:
             self.fields[label] = forms.MultipleChoiceField(
                 label=label.title(), choices=choices, required=False,
                 widget=forms.CheckboxSelectMultiple)
+            self.fields[label].group = label
 
-    @staticmethod
-    def group_by_value(items, i):
+    @ staticmethod
+    def _group_by_value(items, i):
         """
-        Groups iterable to dict by value of given index.
+        Infirm copy of groupby function from itertools.
 
         Args:
-            items (<iterable>): Iterable collection of settings.
-            i (<int>): Index of value to group by.
+            items (<iterable>): Collection of items to sort.
+            i (<int>): Index of item to group by.
 
         Returns:
-            <dict> : Dict containing lists of settings as choices mapped by values of given attribute.
+            <dict>: Dictionary of items grouped by unique values of given item.
         """
         groups = {}
         for item in items:
@@ -46,7 +51,13 @@ class SettingsSelectForm(forms.Form):
         return groups
 
     def clean(self):
-        data = list(chain(*super().clean().values()))
+        """
+        Returns simple list of ids.
+
+        Returns:
+            <list>: List of integers.
+        """
+        data = list(chain.from_iterable(super().clean().values()))
         cleaned_data = list(map(int, data))
         return cleaned_data
 
@@ -55,51 +66,63 @@ class QueryBuilderForm(forms.Form):
 
     query = forms.CharField(required=True)
 
-    def __init__(self, settings, *args, **kwargs):
+    def __init__(self, settings_ids, *args, **kwargs):
         super(QueryBuilderForm, self).__init__(*args, **kwargs)
 
-        settings = [s for s in all_settings.filter(id__in=settings)]
+        # received ids from SettingsSelectForm instance
+        self.settings_ids = settings_ids
+        self.settings = [s for s in all_settings.filter(
+            id__in=self.settings_ids)]
 
-        for s in settings:
+        for s in self.settings:
 
-            name = f'{s.group}_{s.id}'
+            name = f'setting_{s.id}'
             n = s.settingvalue_set.count()
 
-            if n != 0:
+            # boolean fields
+            if n == 2:
+                self.fields[name] = forms.BooleanField(
+                    label=s.descriptor, required=False)
+
+            # choice fields
+            elif 2 < n:
                 choices = [(v.id, v.human_readable)
                            for v in s.settingvalue_set.all()]
-                self.fields[name] = forms.ChoiceField(
-                    label=s.descriptor, choices=choices, required=False)
+                coerce_list = [v[1] for v in choices]
+                self.fields[name] = forms.TypedChoiceField(
+                    label=s.descriptor, choices=choices, coerce=coerce_list, required=False)
+
+            # char fields - the rest of the usual fields
             else:
                 self.fields[name] = forms.CharField(
                     label=s.descriptor, required=False)
 
             self.fields[name].group = s.group
 
-    # def prepare_settings(self, grouped_settings):
-    #     for label, settings in grouped_settings.items():
-    #         settings = all_settings.filter(id__in=settings)
-    #         grouped_settings[label] = settings
-    #     return grouped_settings
+    def clean_query(self):
+        value = self.cleaned_data['query'].replace(' ', '+')
+        # complex_terms_patterns = re.compile(r"""
+        #                                      (?P<phrases>".+?")|                       # phrases
+        #                                      (?P<parenthesis>\(.+?\))|                 # parenthesis
+        #                                      (?P<alternations>(\w+?\s*\|\s*\w+?\b))    # alternations
+        #                                      (?P<specials>\w[a-z]+?[:].+(?:\s))        # special operators
+        #                                      """, re.VERBOSE)
 
-# ignore this class for now
-# class ListTextWidget(forms.TextInput):
+        # complex_terms = re.findall(complex_terms_patterns, query)
 
-#     def __init__(self, name, data_list, *args, **kwargs):
-#         super(ListTextWidget, self).__init__(*args, **kwargs)
-#         self._name = name
-#         self._list = data_list
-#         self.attrs.update({'list': f'list__{self._name}'})
+        return value
 
-#     def render(self, name, value, attrs=None, renderer=None):
-#         """
-#         Render the widget as an HTML string.
-#         """
-#         text_html = super(ListTextWidget, self).render(
-#             name, value, attrs=attrs)
-#         data_list = f'<datalist id="list__{self._name}">'
-#         for item in self._list:
-#             data_list += f'<option value="{item}">'
-#         data_list += '</datalist>'
+    def clean(self):
+        # boolean_fields = ('81', '84', '85', '86', '91')
+        cleaned_data = self.cleaned_data
+        data = super().clean()
+        print(data)
+        return cleaned_data
 
-#         return (text_html + data_list)
+    @ staticmethod
+    def _clean_boolean_fields():
+        data = [(k, v) for (k, v) in cleaned_data.items() if type(v) == bool}
+
+        cleaned_data = {}
+        for k, v in data:
+            key = k.split('_')[1]

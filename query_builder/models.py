@@ -52,7 +52,7 @@ class SearchSetting(models.Model):
         Independent of engine general clues for using specific setting.
 
     group : <str>
-        Types grouping settings in functional sets.
+        Settings' functional group marker.
 
     """
 
@@ -111,7 +111,7 @@ class Invocation(models.Model):
 
 class SettingValue(models.Model):
     """
-    Storing choices for setting if is needed.
+    Storing choices for settings if is needed.
 
     Atributes
     ---------

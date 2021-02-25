@@ -3,6 +3,7 @@ from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView
 
 from .forms import QueryBuilderForm, SettingsSelectForm
+from .models import SearchEngine
 
 
 class MainIndex(TemplateView):
@@ -15,7 +16,7 @@ class MainIndex(TemplateView):
 
 
 class SettingsSelectView(FormView):
-    template_name = 'query_builder/forms.html'
+    template_name = 'query_builder/query_builder.html'
     form_class = SettingsSelectForm
     success_url = '/query_builder'
 
@@ -25,13 +26,20 @@ class SettingsSelectView(FormView):
 
 
 class QueryBuilderView(FormView):
-    # TODO embrance the chaos with templates
     template_name = 'query_builder/query_builder.html'
     form_class = QueryBuilderForm
     success_url = '/'
 
     def get_form(self, form_class=None):
-        settings = self.request.session.get('temp_data')
+        settings_ids = self.request.session.get('temp_data')
         if form_class is None:
             form_class = self.get_form_class()
-        return self.form_class(settings, **self.get_form_kwargs())
+        return self.form_class(settings_ids, **self.get_form_kwargs())
+
+    def form_valid(self, form):
+        # makeshift solution before implementing more search engines
+        engine = SearchEngine.objects.get(pk=3).get_url
+        params = form.cleaned_data
+        print(engine)
+
+        return super().form_valid(form)
