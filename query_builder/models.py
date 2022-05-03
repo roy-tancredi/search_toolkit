@@ -5,7 +5,7 @@ class SearchEngine(models.Model):
     """
     Represents a search engine.
 
-    Atributes
+    Attributes
     ---------
     name : <str>
         Distinctive name of search engine (or specific query type).
@@ -34,7 +34,7 @@ class SearchSetting(models.Model):
     Represents search operators/special operators and more advenced search option, 
     like changing location or language, etc.
 
-    Atributes
+    Attributes
     ---------
     descritor : <str>
         Distinctive and diserable name of given option.
@@ -78,7 +78,7 @@ class Invocation(models.Model):
     """
     Contains specific usage parametrs for specific option in various search engines.
 
-    Atributes
+    Attributes
     ---------
     engine : <ForeignKey>
         Relation to SearchEngine Model.
@@ -113,7 +113,7 @@ class SettingValue(models.Model):
     """
     Storing choices for settings if is needed.
 
-    Atributes
+    Attributes
     ---------
 
     value : <str>
